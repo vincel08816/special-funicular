@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Topbar from './components/Topbar'
@@ -32,9 +32,9 @@ function App() {
         <PageContainer>
           <div id="modal-root" />
           <Topbar />
-          {/* <Switch> */}
+          <Switch>
             <Route exact path='/' component={Coins} />
-          {/* </Switch> */}
+          </Switch>
           <Footer />
         </PageContainer>
     </Router>

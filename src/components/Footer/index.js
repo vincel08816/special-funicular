@@ -1,13 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Footer, Nav, FooterText } from './FooterElements'
-import { FooterLink } from './FooterLink'
+import { Nav } from './FooterElements'
 
 import twitter from "../../assets/img/social_twitter.png";
 import medium from "../../assets/img/social_medium.png";
 import telegram from "../../assets/img/social_telegram.png";
 import discord from "../../assets/img/social_discord.png";
-
 
 const FooterContainer = styled.div`
   padding: 30px;

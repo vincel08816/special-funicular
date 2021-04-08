@@ -57,6 +57,9 @@ const Td = styled.td`
   @media screen and (max-width: 500px) {
     padding: 7px 2px;
   }
+  @media screen and (max-width: 350px) {
+    font-size: 10;
+  }
   ${({ symbol }) =>
   symbol && css`
     @media screen and (max-width: 900px) {
@@ -86,19 +89,27 @@ const Div = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
   }
+  @media screen and (max-width: 350px) {
+    font-size: 10;
+  }
 `
 
 export const CoinData = styled.div`
   display: flex;
   text-align: right;
+  @media screen and (max-width: 350px) {
+    font-size: 10;
+  }
 `
 
 export const CoinName = styled.h1`
   font-size: 16px;
   margin-left: 8px;
-  // text-align: left;
   @media screen and (max-width: 900px) {
     display: none;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 10;
   }
 `
 export const CoinImg = styled.img`
@@ -112,10 +123,9 @@ export const CoinImg = styled.img`
     align-items: center;
     text-align: center;
   }
-  // @media screen and (max-width: 600px) {
-  //   height: 15px;
-  //   width: 15px;
-  // }
+  @media screen and (max-width: 350px) {
+    font-size: 10;
+  }
 `
 
 export const CoinSymbol = styled.p`
@@ -127,7 +137,6 @@ export const CoinSymbol = styled.p`
   mobile && css`
     display: none;
     @media screen and (max-width: 900px) {
-      font-size: 13px;
       padding: 15px 5px;
     }
   `

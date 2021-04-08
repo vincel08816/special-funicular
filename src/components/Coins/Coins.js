@@ -41,7 +41,8 @@ const Coins = () => {
   const [coinid, setCoinid] = useState('');
   const [filteredCoins, setFilteredCoins] = useState([])
 
-  console.log("coins.length", coins ? coins.length: null)
+  // console.log("coins.length", coins ? coins.length: null)
+
   useEffect(() => {
     const displayCoins = () => {
       const pageStart = page * 10 - 10;
@@ -99,13 +100,16 @@ const Coins = () => {
       </CoinSearch>
       <TableDiv>
       <Table>
-        <tr>
-          <Th>Coin</Th>
-          <Th>Price</Th>
-          <Th>Market Cap</Th>
-          <Th>24h %</Th>
-          <Th detail>24-H Volume</Th>
-        </tr>
+        <thead>
+          <tr>
+            <Th>Coin</Th>
+            <Th>Price</Th>
+            <Th>Market Cap</Th>
+            <Th>24h %</Th>
+            <Th detail>24-H Volume</Th>
+          </tr>
+        </thead>
+        <tbody>
         {coins ? display.map(coin => {
           return (
             <Coin
@@ -116,6 +120,7 @@ const Coins = () => {
             />
           );
         }): null}
+        </tbody>
       </Table>
       </TableDiv>
     </Container>

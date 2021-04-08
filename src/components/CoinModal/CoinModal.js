@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
-import styled, {css} from 'styled-components'
+import React, { useRef, useEffect, useState } from 'react';
+import styled from 'styled-components'
 import { MdClose } from 'react-icons/md';
 import axios from 'axios'
 import Spinner from '../Spinner/Spinner'
@@ -49,8 +49,7 @@ const ModalWrapper = styled.div`
     width: 100%;
   }
   @media screen and (max-height: 640px) {
-    height: 60%;
-
+    height: 70%;
   }
 `;
 
