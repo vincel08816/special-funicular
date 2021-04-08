@@ -5,7 +5,6 @@ import styled from 'styled-components';
 export const Footer = styled.div`
   display: flex;
   background-color: #33415E;
-  height: 400px;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -29,4 +28,4 @@ export const Nav = styled.div`
   align-items: center;
   margin-horizontal: 10rem;
   text-align: center;
-`;
+`

@@ -34,7 +34,14 @@ export const Nav = styled.nav`
     // justify-content: space-between;
     position: fixed;
     z-index: 1000;
+  }
 
+  ${({ wide }) =>
+  wide && css`
+    @media screen and (min-width: 863px) {
+      width: 863px;
+    }
+    `
   }
 `
 export const NavLink = styled(Link)`

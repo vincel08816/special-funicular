@@ -20,17 +20,23 @@ const BackgroundImg = styled.div`
   z-index: -1;
   background-blend-mode: darken;
 `
+const PageContainer = styled.div`
+  position: relative;
+  min-height: 100vh;
+`
 
 function App() {
   return (
     <Router>
       <BackgroundImg />
-      <div id="modal-root" />
-        <Topbar />
-        {/* <Switch> */}
-          <Route exact path='/' component={Coins} />
-        {/* </Switch> */}
-        <Footer />
+        <PageContainer>
+          <div id="modal-root" />
+          <Topbar />
+          {/* <Switch> */}
+            <Route exact path='/' component={Coins} />
+          {/* </Switch> */}
+          <Footer />
+        </PageContainer>
     </Router>
   );
 }

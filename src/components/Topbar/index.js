@@ -18,18 +18,20 @@ const Topbar = () => {
   return (
     <>
     <Nav>
-      <Button onClick={() => setDisplayMenu(!displayMenu)}><Bars /></Button>
-      <NavMenu>
-        <NavLink to='/'>Home</NavLink>
-        <NavLink to='/'>About</NavLink>
-        <NavLink to='/'>Store</NavLink>
-      </NavMenu>
-        <Logo src={imgLink} alt=""/>
-      <NavMenu>
-        <NavLink to='/'>Team</NavLink>
-        <NavLink to='/'>Contact Us</NavLink>
-        <Logout to='/'>Logout</Logout>
-      </NavMenu>
+      <Nav wide>
+        <Button onClick={() => setDisplayMenu(!displayMenu)}><Bars /></Button>
+        <NavMenu>
+          <NavLink to='/'>Home</NavLink>
+          <NavLink to='/'>About</NavLink>
+          <NavLink to='/'>Store</NavLink>
+        </NavMenu>
+          <Logo src={imgLink} alt=""/>
+        <NavMenu>
+          <NavLink to='/'>Team</NavLink>
+          <NavLink to='/'>Contact Us</NavLink>
+          <Logout to='/'>Logout</Logout>
+        </NavMenu>
+      </Nav>
     </Nav>
     {displayMenu ? <NavDropDown>
         <NavLink dropdown to='/'>Home</NavLink>

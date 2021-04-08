@@ -9,7 +9,6 @@ const Coin = ({
   const {
     id,
     total_volume: marketcap,
-    name,
     current_price: price,
     symbol,
     market_cap: volume,
@@ -22,20 +21,24 @@ const Coin = ({
   }
   return (
     <>
-      <tr onClick={() => handleClick()}>
+      {coin ? <tr onClick={() => handleClick()}>
         <Td>
           <Div>
             <CoinImg src={image} alt='crypto' />
-            <CoinName>{name}</CoinName>
-            <CoinSymbol mobile>{symbol}</CoinSymbol>
+            <CoinSymbol>{symbol}</CoinSymbol>
           </Div>
         </Td>
-        <Td symbol><CoinSymbol>{symbol}</CoinSymbol></Td>
+        {/* <Td symbol><CoinSymbol>{symbol}</CoinSymbol></Td> */}
         <Td>${price}</Td>
-        <Td>${volume.toLocaleString()}</Td>
-        <Td>{priceChange < 0 ? <Red>{priceChange.toFixed(2)}%</Red>:<Green>{priceChange.toFixed(2)}%</Green>}</Td>
-        <Td hide>${marketcap.toLocaleString()}</Td>
-      </tr>
+        <Td>${volume !== null? volume.toLocaleString(): null}</Td>
+        <Td>
+          {priceChange !== null ? 
+            (priceChange < 0 ? <Red>{priceChange.toFixed(2)}%</Red>:<Green>{priceChange.toFixed(2)}%</Green>) :
+            null
+          }
+        </Td>
+        <Td hide>{marketcap ? <>${marketcap.toLocaleString()}</> : null}</Td>
+      </tr> : null}
     </>
   );
 };
@@ -75,6 +78,7 @@ const Div = styled.div`
   background: none;
   border: none;
   display: flex;
+  flex-direction: left;
   align-items: center;
   justify-content: left;
   @media screen and (max-width: 900px) {
@@ -116,12 +120,13 @@ export const CoinImg = styled.img`
 
 export const CoinSymbol = styled.p`
   text-transform: uppercase;
-
+  @media screen and (min-width: 900px) {
+    padding-left: 10px;
+  }
   ${({ mobile }) =>
   mobile && css`
     display: none;
     @media screen and (max-width: 900px) {
-      display: inline;
       font-size: 13px;
       padding: 15px 5px;
     }

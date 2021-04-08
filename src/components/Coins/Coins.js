@@ -1,50 +1,83 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Coin from './Coin';
-import { Container, CoinSearch, SearchTitle, Searchbar, SearchbarInput } from './StyledCoinElements'
+import { Container, CoinSearch, Searchbar, SearchbarInput } from './StyledCoinElements'
 import styled, { css } from 'styled-components'
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs';
 import Portal from '../Portal/Portal'
 import CoinModal from '../CoinModal/CoinModal'
 
+const load = async (coins, setCoins, setFilteredCoins) => {
+  let tempData = []
+  let one = axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false`)
+  let two = axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=2&sparkline=false`)
+  let three = axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=3&sparkline=false`)
+  let four = axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=4&sparkline=false`)
 
-const load = async(setCoins, page) => {
-  axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=${page}&sparkline=false`)
-  .then(res => { setCoins(res.data) })
-  .catch(error => console.log(error));  
+  axios.all([one,two, three, four]).then(axios.spread((...responses) => {
+    const responseOne = responses[0]
+    const responseTwo = responses[1]
+    const responseThree = responses[2]
+    const responseFour = responses[3]
+
+    tempData.push(...responseOne.data, ...responseTwo.data, ...responseThree.data, ...responseFour.data)
+    for(let i = 0; i < tempData.length; i++){
+      tempData.filter(x => x.id === tempData[0].id)
+    }
+    setCoins(tempData)
+    if (!coins) setFilteredCoins(tempData)
+  })).catch(errors => {
+    console.log(errors)
+  })
 };
 
 const Coins = () => {
   const [minutes, setMinutes] = useState(0);
-  const [coins, setCoins] = useState([]);
+  const [coins, setCoins] = useState();
   const [page, setPage] = useState(1);
+  const [display, setDisplay] = useState([]);
   const [search, setSearch] = useState('');
   const [open, setOpen] = useState(false)
   const [coinid, setCoinid] = useState('');
+  const [filteredCoins, setFilteredCoins] = useState([])
+
+  console.log("coins.length", coins ? coins.length: null)
+  useEffect(() => {
+    const displayCoins = () => {
+      const pageStart = page * 10 - 10;
+      const pageEnd = page * 10 - 1;
+      return filteredCoins.slice(pageStart, pageEnd)
+    }
+    const result = displayCoins()
+    setDisplay(result);
+  }, [page, filteredCoins])
 
   useEffect(() => {
-    load(setCoins, page)
-    console.log("useEffect 1")
-  }, [page])
-
-  useEffect(() => {
+    load(coins, setCoins, setFilteredCoins)
     const interval = setInterval(() => {
       setMinutes(minutes => minutes + 1);
-      load(setCoins, page)
-      console.log("useEffect 2")
+      load(coins, setCoins, setFilteredCoins)
     }, 60000);
     return () => clearInterval(interval);
-  }, [page]);
+  }, []);
 
   const handleChange = e => {
+    setPage(1)
     setSearch(e.target.value);
+    if (e.target.value === "") 
+      return setFilteredCoins(coins)
+    setFilteredCoins(coins.filter(coin =>
+      coin.name.toLowerCase().includes(search.toLowerCase()) + coin.symbol.toLowerCase().includes(search.toLowerCase())
+      )
+    );
   };
 
-  const filteredCoins = coins.filter(coin => (
-      coin.name.toLowerCase().includes(search.toLowerCase()) + coin.symbol.toLowerCase().includes(search.toLowerCase())
-    )
-  );
-  
+  const pageBack = () => {
+    setPage(page > 1 ? page - 1 : page)
+  }
+  const pageNext = () => {
+    setPage(filteredCoins.length > ((page + 1) * 10 - 10) && page < 100 ? page + 1 : page)
+  }
   return (
     <Container>
       <Portal id="modal-root">
@@ -59,32 +92,24 @@ const Coins = () => {
           />
         </Searchbar>
         <PageSection>
-          <Button onClick={() => setPage(page > 1 ? page - 1 : page)}><BsChevronDoubleLeft /></Button>
+          <Button onClick={() => pageBack()}><BsChevronDoubleLeft /></Button>
           <PageDiv>Page {page}</PageDiv>
-          <Button onClick={() => setPage(page + 1)}><BsChevronDoubleRight /></Button>
+          <Button onClick={() => pageNext()}><BsChevronDoubleRight /></Button>
         </PageSection>
       </CoinSearch>
       <TableDiv>
       <Table>
         <tr>
           <Th>Coin</Th>
-          <Th symbol>Symbol</Th>
           <Th>Price</Th>
           <Th>Market Cap</Th>
           <Th>24h %</Th>
           <Th detail>24-H Volume</Th>
         </tr>
-        {coins ? filteredCoins.map(coin => {
+        {coins ? display.map(coin => {
           return (
             <Coin
               key={coin.id}
-              name={coin.name}
-              price={coin.current_price}
-              symbol={coin.symbol}
-              marketcap={coin.total_volume}
-              volume={coin.market_cap}
-              image={coin.image}
-              priceChange={coin.price_change_percentage_24h}
               coin={coin}
               setOpen={setOpen}
               setCoinid={setCoinid}
@@ -107,7 +132,7 @@ const Button = styled.button`
   cursor: pointer;
 `
 
-const TableDiv = styled.div`oooooooo
+const TableDiv = styled.div`
   display: flex;
 `
 const Table = styled.table`
@@ -146,7 +171,6 @@ const PageSection = styled.section`
   align-items: center;
   height: 75px;
   margin-bottom: 30px;
-  // opacity: 0.6;
 `
 
 

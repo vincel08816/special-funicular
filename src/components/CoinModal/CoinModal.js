@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useCallback, useState } from 'react';
 import styled, {css} from 'styled-components'
 import { MdClose } from 'react-icons/md';
 import axios from 'axios'
+import Spinner from '../Spinner/Spinner'
 
 import ReactHtmlParser from 'react-html-parser';
 
@@ -128,32 +129,38 @@ const CoinModal = ({open, setOpen, coinid }) => {
       .then(res => { setData(res.data); console.log(res.data)})
       .catch(error => console.log(error));  
     };
+    setData()
     if (coinid) load()
   }, [coinid])
 
   const closeModal = e => {
     if (modalRef.current === e.target) {
-      setOpen(false);
       setData()
+      setOpen(false);
     }
   };
   return (
     <>
-      {data && open ? (
+      {open ? (
         <Background onClick={closeModal} ref={modalRef}>
           <ModalWrapper >
             <CloseModalButton
               aria-label='Close modal'
               onClick={() => setOpen(prev => !prev)}
             />
+            {data ?
             <ModalContent>
               <Header>
                 <CoinTitle><Img src={data.image.small} alt=""/>{data.name}({data.symbol.toUpperCase()})</CoinTitle>
                 <Price><h2>${data.market_data.current_price.usd}</h2><Percentage number={data.market_data.price_change_percentage_24h_in_currency.usd}/></Price>
               </Header>
               <H2>What is {data.name}?</H2>
-              <section>{ ReactHtmlParser(data.description.en) }</section>
-            </ModalContent>
+              {data.description.en ? 
+                <section>{ ReactHtmlParser(data.description.en) }</section> : 
+                "No description..."
+              }
+            </ModalContent>:
+            <Spinner />}
           </ModalWrapper>
         </Background>
       ) : null}

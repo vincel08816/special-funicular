@@ -20,7 +20,7 @@ const FooterContainer = styled.div`
   color: white;
   height: 100px;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
 `
 const SocialIcon = styled.img`
   height: 30px;
@@ -34,7 +34,6 @@ const FooterDiv = styled.div`
   text-align: center;
   margin-bottom: 10px;
 `
-
 
 const FooterNav = () => {
   return (
