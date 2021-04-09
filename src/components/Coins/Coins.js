@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Coin from './Coin';
-import { Container, CoinSearch, Searchbar, SearchbarInput } from './StyledCoinElements'
-import styled, { css } from 'styled-components'
+import CoinRow from './CoinRow';
+import { 
+  Container,
+  CoinSearch,
+  Searchbar,
+  SearchbarInput,
+  PageSection,
+  Button,
+  PageDiv,
+  TableDiv,
+  Table,
+  Th
+} from './CoinsStyles.js'
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs';
 import Portal from '../Portal/Portal'
 import CoinModal from '../CoinModal/CoinModal'
@@ -53,17 +63,19 @@ const Coins = () => {
     setDisplay(result);
   }, [page, filteredCoins])
 
+  // updates every 30 seconds
   useEffect(() => {
     load(coins, setCoins, setFilteredCoins)
     const interval = setInterval(() => {
       setMinutes(minutes => minutes + 1);
       load(coins, setCoins, setFilteredCoins)
-    }, 60000);
+    }, 30000);
     return () => clearInterval(interval);
   }, []);
 
   const handleChange = e => {
-    setPage(1)
+    if (e.target.value !== search)
+      setPage(1)
     setSearch(e.target.value);
     if (e.target.value === "") 
       return setFilteredCoins(coins)
@@ -71,6 +83,7 @@ const Coins = () => {
       coin.name.toLowerCase().includes(search.toLowerCase()) + coin.symbol.toLowerCase().includes(search.toLowerCase())
       )
     );
+    console.log(filteredCoins)
   };
 
   const pageBack = () => {
@@ -102,6 +115,7 @@ const Coins = () => {
       <Table>
         <thead>
           <tr>
+            <Th detail> </Th>
             <Th>Coin</Th>
             <Th>Price</Th>
             <Th>Market Cap</Th>
@@ -112,7 +126,7 @@ const Coins = () => {
         <tbody>
         {coins ? display.map(coin => {
           return (
-            <Coin
+            <CoinRow
               key={coin.id}
               coin={coin}
               setOpen={setOpen}
@@ -126,61 +140,5 @@ const Coins = () => {
     </Container>
   )
 }
-
-const Button = styled.button`
-  display: block;
-  height: 100%;
-  border: none;
-  width: 60px;
-  color: white;
-  background: none;
-  cursor: pointer;
-`
-
-const TableDiv = styled.div`
-  display: flex;
-`
-const Table = styled.table`
-  color: white;
-  border-collapse: collapse;
-  justify-content: center;
-  width: 80%;
-`
-
-const Th = styled.th`
-  font-weight: bold;
-  padding-bottom: 20px;
-  border-bottom: 2px solid;
-  ${({ symbol }) =>
-    symbol && css`
-    @media screen and (max-width: 900px) {
-      display: none;
-    }
-    `
-  }
-  ${({ detail }) =>
-    detail && css`
-    @media screen and (max-width: 768px) {
-      display: none;
-    }
-    `
-  }
-`
-
-const PageSection = styled.section`
-  display: flex;
-  background: black;
-  color: white;
-  border: 1px solid black;
-  justify-content: space-between;
-  align-items: center;
-  height: 75px;
-  margin-bottom: 30px;
-`
-
-
-const PageDiv = styled.div`
-  padding-top: 5px;
-`
 
 export default Coins
