@@ -14,7 +14,7 @@ const FooterContainer = styled.div`
   align-content: center;
   background-color: #33415E;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
   color: white;
   height: 100px;
   flex-direction: column;

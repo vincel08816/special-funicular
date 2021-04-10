@@ -12,7 +12,17 @@ import {
   TableDiv,
   Table,
   Th
-} from './CoinsStyles.js'
+} from './CoinsStyles'
+
+import {
+  Logoth,
+  Nameth,
+  Priceth,
+  MarketCapth,
+  Volumeth,
+  PriceChangeth
+} from './CoinsStyles'
+
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs';
 import Portal from '../Portal/Portal'
 import CoinModal from '../CoinModal/CoinModal'
@@ -53,6 +63,7 @@ const Coins = () => {
 
   // console.log("coins.length", coins ? coins.length: null)
 
+  console.log(search)
   useEffect(() => {
     const displayCoins = () => {
       const pageStart = page * 10 - 10;
@@ -60,6 +71,7 @@ const Coins = () => {
       return filteredCoins.slice(pageStart, pageEnd)
     }
     const result = displayCoins()
+    
     setDisplay(result);
   }, [page, filteredCoins])
 
@@ -74,23 +86,23 @@ const Coins = () => {
   }, []);
 
   const handleChange = e => {
-    if (e.target.value !== search)
-      setPage(1)
     setSearch(e.target.value);
+    if ((filteredCoins.length > (page * 10 - 10)) && page < 100)
+      setPage(1);
     if (e.target.value === "") 
       return setFilteredCoins(coins)
     setFilteredCoins(coins.filter(coin =>
-      coin.name.toLowerCase().includes(search.toLowerCase()) + coin.symbol.toLowerCase().includes(search.toLowerCase())
+        coin.name.toLowerCase().includes(search.toLowerCase()) || coin.symbol.toLowerCase().includes(search.toLowerCase())
       )
     );
-    console.log(filteredCoins)
   };
 
   const pageBack = () => {
-    setPage(page > 1 ? page - 1 : page)
+    if (page > 1) setPage(page - 1)
   }
   const pageNext = () => {
-    setPage(filteredCoins.length > ((page + 1) * 10 - 10) && page < 100 ? page + 1 : page)
+    if (filteredCoins.length > ((page + 1) * 10 - 10) && page < 100)
+      setPage(page + 1)
   }
   return (
     <Container>
@@ -115,12 +127,12 @@ const Coins = () => {
       <Table>
         <thead>
           <tr>
-            <Th detail> </Th>
-            <Th>Coin</Th>
-            <Th>Price</Th>
-            <Th>Market Cap</Th>
-            <Th>24h %</Th>
-            <Th detail>24-H Volume</Th>
+            <Logoth detail> </Logoth>
+            <Nameth>Coin</Nameth>
+            <Priceth>Price</Priceth>
+            <MarketCapth>Market Cap</MarketCapth>
+            <PriceChangeth>24h %</PriceChangeth>
+            <Volumeth detail>24-H Volume</Volumeth>
           </tr>
         </thead>
         <tbody>

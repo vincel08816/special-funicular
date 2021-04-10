@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  Td,
+  NameDiv,
   Nametd,
-  Symboltd,
+  Logotd,
   MarketCaptd,
   Pricetd,
   Div,
@@ -36,14 +36,14 @@ const CoinRow = ({
   return (
     <>
       {coin ? <tr onClick={() => handleClick()}>
-        <Symboltd>
+        <Logotd>
           <Div>
             <CoinImg src={image} alt='crypto' />
             <CoinSymbol mobile>{symbol}</CoinSymbol>
           </Div>
-        </Symboltd>
-        <Nametd hide><CoinName>{coin.name}</CoinName><CoinSymbol>({symbol})</CoinSymbol></Nametd>
-        <Pricetd><p>${price}</p></Pricetd>
+        </Logotd>
+        <Nametd hide><NameDiv><CoinName>{coin.name}</CoinName><CoinSymbol>({symbol})</CoinSymbol></NameDiv></Nametd>
+        <Pricetd><p>${price.toString().substring(0, 7)}</p></Pricetd>
         <MarketCaptd>{marketCap !== undefined? <p>${marketCap.toLocaleString()}</p>: null}</MarketCaptd>
         <PriceChangetd>
           {priceChange !== null ? 

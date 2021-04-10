@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Background, ModalWrapper, ModalContent, CloseModalButton, Header, CoinTitle, Img, Price, H2, Percentage} from './CoinModalStyles'
 import axios from 'axios'
 import Spinner from '../Spinner/Spinner'
+import { useSpring, animated } from 'react-spring';
+
 
 import ReactHtmlParser from 'react-html-parser';
 
@@ -19,6 +21,14 @@ const CoinModal = ({open, setOpen, coinid }) => {
     if (coinid) load()
   }, [coinid])
 
+  const animation = useSpring({
+    config: {
+      duration: 250
+    },
+    opacity: open ? 1 : 0,
+    transform: open ? `translateY(0%)` : `translateY(-100%)`
+  });
+
   const closeModal = e => {
     if (modalRef.current === e.target) {
       setData()
@@ -29,25 +39,27 @@ const CoinModal = ({open, setOpen, coinid }) => {
     <>
       {open ? (
         <Background onClick={closeModal} ref={modalRef}>
-          <ModalWrapper >
-            <CloseModalButton
-              aria-label='Close modal'
-              onClick={() => setOpen(prev => !prev)}
-            />
-            {data ?
-            <ModalContent>
-              <Header>
-                <CoinTitle><Img src={data.image.small} alt=""/>{data.name}({data.symbol.toUpperCase()})</CoinTitle>
-                <Price><h2>${data.market_data.current_price.usd}</h2><Percentage number={data.market_data.price_change_percentage_24h_in_currency.usd}/></Price>
-              </Header>
-              <H2>What is {data.name}?</H2>
-              {data.description.en ? 
-                <section>{ ReactHtmlParser(data.description.en) }</section> : 
-                "No description..."
-              }
-            </ModalContent>:
-            <Spinner />}
-          </ModalWrapper>
+          <animated.div style={animation}>
+            <ModalWrapper >
+              <CloseModalButton
+                aria-label='Close modal'
+                onClick={() => setOpen(prev => !prev)}
+              />
+              {data ?
+              <ModalContent>
+                <Header>
+                  <CoinTitle><Img src={data.image.small} alt=""/>{data.name}({data.symbol.toUpperCase()})</CoinTitle>
+                  <Price><h2>${data.market_data.current_price.usd}</h2><Percentage number={data.market_data.price_change_percentage_24h_in_currency.usd}/></Price>
+                </Header>
+                <H2>What is {data.name}?</H2>
+                {data.description.en ? 
+                  <section>{ ReactHtmlParser(data.description.en) }</section> : 
+                  "No description..."
+                }
+              </ModalContent>:
+              <Spinner />}
+            </ModalWrapper>
+          </animated.div>
         </Background>
       ) : null}
     </>

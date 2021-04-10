@@ -8,7 +8,6 @@ export const Container = styled.div`
   padding-top: 50px;
   padding-bottom: 150px;
   flex-direction: column;
-
   @media screen and (max-width: 768px) {
     padding-top: 100px;
   }
@@ -52,14 +51,14 @@ export const Button = styled.button`
 `
 
 export const TableDiv = styled.div`
-  display: flex;
+  // display: flex;
 `
 export const Table = styled.table`
   color: white;
   border-collapse: collapse;
   justify-content: center;
   width: 800px;
-  max-width 80vw;
+  max-width 90vw;
 `
 
 export const Th = styled.th`
@@ -97,3 +96,30 @@ export const PageSection = styled.section`
 export const PageDiv = styled.div`
   padding-top: 5px;
 `
+
+
+export const Logoth = styled(Th)`
+  width: 60px;
+`
+
+export const Nameth = styled(Th)`
+  width: 130px;
+`
+
+export const Priceth = styled(Th)`
+  width: 80px;
+`
+
+export const MarketCapth = styled(Th)`
+  width: 165px;
+
+`
+
+export const Volumeth = styled(Th)`
+  width: 130px;
+`
+
+export const PriceChangeth = styled(Th)`
+  width: 60px;
+`
+

@@ -6,9 +6,6 @@ export const Td = styled.td`
   align-items: center;
   border-bottom: 1px solid;
   cursor: pointer;
-  // @media screen and (min-width: 769px) {
-  //   padding: 25px 10px;
-  // }
   @media screen and (max-width: 450px) {
     max-width: 130px;
     p {
@@ -32,45 +29,32 @@ export const Td = styled.td`
     }
 `
 
-export const Symboltd= styled(Td)`
+export const Logotd= styled(Td)`
   width: 60px;
-  max-width: 60px;
 `
 
 export const Nametd = styled(Td)`
-  width: 110px;
-  // max-width: 120px;
-  // min-width: 120px;
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
+  width: 130px;
 `
+
 export const Pricetd = styled(Td)`
-    width: 110px;
-    max-width: 110px;
-    min-width: 110px;
+  width: 80px;
 `
 
 export const MarketCaptd = styled(Td)`
   width: 165px;
-  max-width: 165px;
-  min-width: 165px;
+
 `
 
 export const Volumetd = styled(Td)`
-    width: 130px;
-    max-width: 130px;
-    min-width: 130px;
+  width: 130px;
 `
 
 export const PriceChangetd = styled(Td)`
-    width: 80px;
+  width: 60px;
 `
 
 export const Div = styled.div`
-  color: white;
-  background: none;
-  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,6 +67,14 @@ export const Div = styled.div`
   }
 `
 
+export const NameDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+`
+
 export const CoinData = styled.div`
   display: flex;
   text-align: right;
@@ -92,6 +84,7 @@ export const CoinData = styled.div`
 `
 
 export const CoinName = styled.h1`
+  width: 130px;
   font-size: 16px;
   word-wrap: break-word;
   @media screen and (max-width: 768px) {
