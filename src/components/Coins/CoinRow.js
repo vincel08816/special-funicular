@@ -43,7 +43,7 @@ const CoinRow = ({
           </Div>
         </Symboltd>
         <Nametd hide><CoinName>{coin.name}</CoinName><CoinSymbol>({symbol})</CoinSymbol></Nametd>
-        <Pricetd><p>${price}</p></Pricetd>
+        <Pricetd><p>${price.toString().substring(0, 6)}</p></Pricetd>
         <MarketCaptd>{marketCap !== undefined? <p>${marketCap.toLocaleString()}</p>: null}</MarketCaptd>
         <PriceChangetd>
           {priceChange !== null ? 

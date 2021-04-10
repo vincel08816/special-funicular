@@ -29,7 +29,7 @@ export const LogoDiv = styled.div`
 `
 
 export const Nav = styled.nav`
-  width: 100%;
+  width: 100vw;
   background-color: #232834;
   color: #fff;
   display: flex;
