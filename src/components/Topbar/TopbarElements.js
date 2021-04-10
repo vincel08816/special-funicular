@@ -3,23 +3,29 @@ import { NavLink as Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 export const Logo = styled.img`
-  // position: absolute;
   height: 75px;
   box-shadow: 10px -10px  rgba(0,0,0,0.6);
   -moz-box-shadow: 10px -10px  rgba(0,0,0,0.6);
   -webkit-box-shadow: 10px -10px  rgba(0,0,0,0.6);
   -o-box-shadow: 10px -10px  rgba(0,0,0,0.6);
-  border-radius:100px;
+  border-radius: 100px;
+  // @media screen and (max-width: 450px) {
+  //   box-shadow: -20px -20px  rgba(0,0,0,0.6);
+  //   -moz-box-shadow: -20px -20px  rgba(0,0,0,0.6);
+  //   -webkit-box-shadow: -0px -13px  rgba(0,0,0,0.6);
+  //   -o-box-shadow: -10px -10px  rgba(0,0,0,0.6);
+  // }
+`
+
+export const LogoDiv = styled.div`
   margin-top: 20px;
-  @media screen and (max-width: 768px) {
-    // position: fixed;
-    // margin-left: 45%
-    margin-left: 20px
-  }
-  @media screen and (max-width: 600px) {
-    // position: fixed;
-    // margin-left: 38%
-  }
+  display: flex;
+  justify-content: flex-start;
+  width: 85px;
+  height: 75px;
+  // @media screen and (max-width: 450px) {
+  //   justify-content: center;
+  // }
 `
 
 export const Nav = styled.nav`
@@ -33,9 +39,8 @@ export const Nav = styled.nav`
   @media screen and (max-width: 768px) {
     // justify-content: space-between;
     position: fixed;
-    z-index: 1000;
+    z-index: 10;
   }
-
   ${({ wide }) =>
   wide && css`
     @media screen and (min-width: 863px) {
@@ -91,10 +96,15 @@ export const Logout = styled(Link)`
   &.active {
   }
   @media screen and (max-width: 768px) {
-    display: flex;
     padding:0;
-    margin: 0;
-    margin-top 10px;
+    padding: 0;
+    margin-top: 12px;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-55%, 75%);
+    cursor: pointer;
   }
 `
 
@@ -130,7 +140,7 @@ export const Button = styled.button`
 export const NavDropDown = styled.div`
   top: 75px;
   align-items: center;
-  background: #111111;
+  background: #1B2733;
   flex-direction: column;
   padding-bottom: 30px;
   position: fixed;

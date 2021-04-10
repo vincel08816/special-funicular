@@ -39,22 +39,19 @@ export const Symboltd= styled(Td)`
 
 export const Nametd = styled(Td)`
   width: 110px;
-  // max-width: 120px;
-  // min-width: 120px;
   @media screen and (max-width: 768px) {
     display: none;
   }
 `
 export const Pricetd = styled(Td)`
-    width: 110px;
-    max-width: 110px;
-    min-width: 110px;
+  width: 110px;
+  @media screen and (max-width: 500px) {
+    width: 90px;
+  }
 `
 
 export const MarketCaptd = styled(Td)`
   width: 165px;
-  max-width: 165px;
-  min-width: 165px;
 `
 
 export const Volumetd = styled(Td)`

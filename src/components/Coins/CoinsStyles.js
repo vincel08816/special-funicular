@@ -8,9 +8,11 @@ export const Container = styled.div`
   padding-top: 50px;
   padding-bottom: 150px;
   flex-direction: column;
+  // width: 80vw;
+  max-width: 100vw;
 
   @media screen and (max-width: 768px) {
-    padding-top: 100px;
+    padding-top: 80px;
   }
 `
 
@@ -20,13 +22,13 @@ export const CoinSearch = styled.div`
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  width: 400px;
-  @media screen and (max-width: 800px) {
-    width: 60%;
-  }
-  @media screen and (max-width: 400px) {
-    width: 80%;
-  }
+  width: 100%;
+  // @media screen and (max-width: 800px) {
+  //   width: 60%;
+  // }
+  // @media screen and (max-width: 400px) {
+  //   width: 80%;
+  // }
 `
 
 export const Searchbar = styled.form`
@@ -45,10 +47,14 @@ export const Button = styled.button`
   display: block;
   height: 100%;
   border: none;
-  width: 60px;
+  width: 45px;
   color: white;
   background: none;
   cursor: pointer;
+`
+export const ButtonDiv = styled.div`
+  display: flex;
+  height: 100%;
 `
 
 export const TableDiv = styled.div`
@@ -57,9 +63,11 @@ export const TableDiv = styled.div`
 export const Table = styled.table`
   color: white;
   border-collapse: collapse;
-  justify-content: center;
-  width: 800px;
-  max-width 80vw;
+  max-width 90vw;
+  table-layout: fixed
+  word-wrap:break-word;
+  cellspacing: 0; 
+  cellpadding: 0;
 `
 
 export const Th = styled.th`
@@ -96,4 +104,28 @@ export const PageSection = styled.section`
 
 export const PageDiv = styled.div`
   padding-top: 5px;
+`
+
+export const Logoth = styled(Th)`
+  width: 60px;
+`
+
+export const Nameth = styled(Th)`
+  width: 130px;
+`
+
+export const Priceth = styled(Th)`
+  width: 80px;
+`
+
+export const MarketCapth = styled(Th)`
+  width: 165px;
+`
+
+export const Volumeth = styled(Th)`
+  width: 130px;
+`
+
+export const PriceChangeth = styled(Th)`
+  width: 80px;
 `

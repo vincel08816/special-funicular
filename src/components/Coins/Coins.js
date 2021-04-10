@@ -11,13 +11,23 @@ import {
   PageDiv,
   TableDiv,
   Table,
-  Th
+  Th,
+  ButtonDiv
 } from './CoinsStyles.js'
-import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs';
+
+import {
+  Logoth,
+  Nameth,
+  Priceth,
+  MarketCapth,
+  Volumeth,
+  PriceChangeth
+} from './CoinsStyles'
+import { BsChevronDoubleLeft, BsChevronLeft, BsChevronDoubleRight,BsChevronRight } from 'react-icons/bs';
 import Portal from '../Portal/Portal'
 import CoinModal from '../CoinModal/CoinModal'
 
-const load = async (coins, setCoins, setFilteredCoins) => {
+const load = async (setCoins) => {
   let tempData = []
   let one = axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false`)
   let two = axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=2&sparkline=false`)
@@ -35,23 +45,24 @@ const load = async (coins, setCoins, setFilteredCoins) => {
       tempData.filter(x => x.id === tempData[0].id)
     }
     setCoins(tempData)
-    if (!coins) setFilteredCoins(tempData)
   })).catch(errors => {
     console.log(errors)
   })
 };
 
+const filter = (coins, search) => {
+  if (coins) {
+    return coins.filter(coin => (coin.name.toLowerCase().includes(search.toLowerCase()) + coin.symbol.toLowerCase().includes(search.toLowerCase())));
+  }
+  return []
+}
 const Coins = () => {
-  const [minutes, setMinutes] = useState(0);
-  const [coins, setCoins] = useState();
-  const [page, setPage] = useState(1);
-  const [display, setDisplay] = useState([]);
-  const [search, setSearch] = useState('');
+  const [coins, setCoins] = useState()
+  const [page, setPage] = useState(1)
+  const [display, setDisplay] = useState([])
+  const [search, setSearch] = useState('')
   const [open, setOpen] = useState(false)
-  const [coinid, setCoinid] = useState('');
-  const [filteredCoins, setFilteredCoins] = useState([])
-
-  // console.log("coins.length", coins ? coins.length: null)
+  const [coinid, setCoinid] = useState('')
 
   useEffect(() => {
     const displayCoins = () => {
@@ -59,16 +70,17 @@ const Coins = () => {
       const pageEnd = page * 10 - 1;
       return filteredCoins.slice(pageStart, pageEnd)
     }
-    const result = displayCoins()
+    let filteredCoins = filter(coins, search)
+
+    const result = displayCoins(coins, search)
     setDisplay(result);
-  }, [page, filteredCoins])
+  }, [coins, page, search])
 
   // updates every 30 seconds
   useEffect(() => {
-    load(coins, setCoins, setFilteredCoins)
+    load(setCoins)
     const interval = setInterval(() => {
-      setMinutes(minutes => minutes + 1);
-      load(coins, setCoins, setFilteredCoins)
+      load(setCoins)
     }, 30000);
     return () => clearInterval(interval);
   }, []);
@@ -77,20 +89,18 @@ const Coins = () => {
     if (e.target.value !== search)
       setPage(1)
     setSearch(e.target.value);
-    if (e.target.value === "") 
-      return setFilteredCoins(coins)
-    setFilteredCoins(coins.filter(coin =>
-      coin.name.toLowerCase().includes(search.toLowerCase()) + coin.symbol.toLowerCase().includes(search.toLowerCase())
-      )
-    );
-    console.log(filteredCoins)
   };
 
-  const pageBack = () => {
-    setPage(page > 1 ? page - 1 : page)
-  }
+  // const pageBack = () => {
+  //   setPage(page > 1 ? page - 1 : page)
+  // }
   const pageNext = () => {
+    let filteredCoins = filter(coins, search)
     setPage(filteredCoins.length > ((page + 1) * 10 - 10) && page < 100 ? page + 1 : page)
+  }
+  const pageLast = () => {
+    let filteredCoins = filter(coins, search)
+    setPage(Math.ceil(filteredCoins.length / 10))
   }
   return (
     <Container>
@@ -105,22 +115,17 @@ const Coins = () => {
             placeholder='Search for a symbol or ticker'
           />
         </Searchbar>
-        <PageSection>
-          <Button onClick={() => pageBack()}><BsChevronDoubleLeft /></Button>
-          <PageDiv>Page {page}</PageDiv>
-          <Button onClick={() => pageNext()}><BsChevronDoubleRight /></Button>
-        </PageSection>
       </CoinSearch>
       <TableDiv>
       <Table>
         <thead>
-          <tr>
-            <Th detail> </Th>
-            <Th>Coin</Th>
-            <Th>Price</Th>
-            <Th>Market Cap</Th>
-            <Th>24h %</Th>
-            <Th detail>24-H Volume</Th>
+        <tr>
+            <Logoth detail> </Logoth>
+            <Nameth>Coin</Nameth>
+            <Priceth>Price</Priceth>
+            <MarketCapth>Market Cap</MarketCapth>
+            <PriceChangeth>24h %</PriceChangeth>
+            <Volumeth detail>24-H Volume</Volumeth>
           </tr>
         </thead>
         <tbody>
@@ -137,6 +142,19 @@ const Coins = () => {
         </tbody>
       </Table>
       </TableDiv>
+      <CoinSearch>
+        <PageSection>
+          <ButtonDiv>
+            <Button onClick={() => setPage(1)}><BsChevronDoubleLeft /></Button>
+            <Button onClick={() => setPage(page > 1 ? page - 1 : page)}><BsChevronLeft /></Button>
+          </ButtonDiv>
+          <PageDiv>Page {page}</PageDiv>
+          <ButtonDiv>
+            <Button onClick={() => pageNext()}><BsChevronRight /></Button>
+            <Button onClick={() => pageLast()}><BsChevronDoubleRight /></Button>
+          </ButtonDiv>
+        </PageSection>
+      </CoinSearch>
     </Container>
   )
 }

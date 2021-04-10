@@ -23,6 +23,14 @@ const BackgroundImg = styled.div`
 const PageContainer = styled.div`
   position: relative;
   min-height: 100vh;
+  max-width: 100vw;
+  width: 100%;
+`
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 function App() {
@@ -32,9 +40,11 @@ function App() {
         <PageContainer>
           <div id="modal-root" />
           <Topbar />
+          <Container>
           <Switch>
             <Route exact path='/' component={Coins} />
           </Switch>
+          </Container>
           <Footer />
         </PageContainer>
     </Router>
