@@ -9,7 +9,7 @@ export const Container = styled.div`
   padding-bottom: 150px;
   flex-direction: column;
   width: 90vw;
-  max-width: 610px;
+  max-width: 680px;
   @media screen and (max-width: 350px) {
     font-size: 15px;
   }
@@ -57,6 +57,7 @@ export const TableDiv = styled.div`
   display: flex;
 `
 export const Table = styled.table`
+  width: 680px;
   color: white;
   border-collapse: collapse;
   max-width 90vw;
@@ -99,7 +100,9 @@ export const PageSection = styled.section`
   align-items: center;
   height: 75px;
   margin-bottom: 30px;
-  width: 100%:
+  // width: 100%:
+  width: 610px;
+
 `
 
 export const ButtonWrapper = styled.div`
