@@ -5,7 +5,7 @@ export const Footer = styled.div`
   background-color: #33415E;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
   color: white;
   justify-content: center;
   align-content: center;
@@ -15,7 +15,7 @@ export const FooterText = styled.div`
   color: #FFF;
   display: flex;
   text-decoration: none;
-  height: 100%
+  // height: 100%
   cursor: pointer;
   text-align: center;
 `;

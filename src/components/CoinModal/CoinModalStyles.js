@@ -9,12 +9,15 @@ export const Background = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
+
 `;
 
 export const ModalWrapper = styled.div`
   width: 800px;
-  max-width: 90vw;
+  max-width: 95vw;
   height: 500px;
+  max-height: 70vh;
   background: #fff;
   display: grid;
   padding: 50px;
@@ -26,7 +29,12 @@ export const ModalWrapper = styled.div`
   &::-webkit-scrollbar {
     width: 20px;
   }
-  
+
+  @media screen and (max-width: 600px) {
+    padding: 20px;
+    padding-top: 50px;
+  }
+
   &::-webkit-scrollbar-track {
     background-color: transparent;
   }
@@ -41,9 +49,6 @@ export const ModalWrapper = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background-color: #a8bbbf;
   }
-  @media screen and (max-width: 800px) {
-    width: 100%;
-  }
   @media screen and (max-height: 640px) {
     height: 70%;
   }
@@ -53,8 +58,10 @@ export const ModalContent = styled.div`
   width: 100%;
   color: #141414;
   p {
-    // margin-bottom: 1rem;
     text-align: right;
+    @media screen and (max-height: 500px) {
+      font-size: 10px;
+    }
   }
   button {
     padding: 10px 24px;
@@ -62,14 +69,15 @@ export const ModalContent = styled.div`
     color: #fff;
     border: none;
   }
+  z-index: 10;
   padding-bottom: 20px;
 `;
 
 export const CloseModalButton = styled(MdClose)`
   cursor: pointer;
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 15px;
+  right: 0px;
   width: 32px;
   height: 32px;
   padding: 0;
@@ -83,7 +91,8 @@ export const Header = styled.div`
   margin-bottom: 20px;
 `
 export const Percent = styled.p`
-  color: ${props => props.color ? props.color : null}
+  color: ${props => props.color ? props.color : null};
+  font-size: 15px;
 `
 
 export const Percentage = ({ number }) => {
@@ -101,7 +110,17 @@ export const CoinTitle = styled.h1`
   }
 `
 
+export const Description = styled.div`
+  line-height: 1.2;
+
+  @media screen and (max-width: 400px) {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+`
+
 export const Price = styled.div`
+  padding-top: 10px;
   @media screen and (max-width: 500px) {
     display: none;
   }

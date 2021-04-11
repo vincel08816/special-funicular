@@ -6,9 +6,6 @@ export const Td = styled.td`
   align-items: center;
   border-bottom: 1px solid;
   cursor: pointer;
-  // @media screen and (min-width: 769px) {
-  //   padding: 25px 10px;
-  // }
   @media screen and (max-width: 450px) {
     max-width: 130px;
     p {
@@ -30,28 +27,52 @@ export const Td = styled.td`
       }
       `
     }
+  @media screen and (max-width: 350px) {
+    p {
+      font-size: 13px;
+    }
+  }
 `
 
 export const Symboltd= styled(Td)`
   width: 60px;
   max-width: 60px;
+  min-width: 60px;
+  @media screen and (max-width: 768px) {
+    max-width:15vw;
+    min-width:15vw;
+  }
 `
 
 export const Nametd = styled(Td)`
-  width: 110px;
+  width: 120px;
+  max-width: 120px;
+  min-width: 120px;
   @media screen and (max-width: 768px) {
     display: none;
   }
 `
 export const Pricetd = styled(Td)`
-  width: 110px;
-  @media screen and (max-width: 500px) {
-    width: 90px;
+  width: 94px;
+  min-width: 94px;
+  max-width: 94px;
+
+  @media screen and (max-width: 768px) {
+    max-width:22vw;
+    min-width:22vw;
   }
 `
-
 export const MarketCaptd = styled(Td)`
-  width: 165px;
+  width: 146px;
+  min-width: 146px;
+  max-width: 146px;
+  // @media screen and (max-width: 330px) {
+  //   display: none;
+  // }
+  @media screen and (max-width: 768px) {
+    max-width:42vw;
+    min-width:42vw;
+  }
 `
 
 export const Volumetd = styled(Td)`
@@ -61,7 +82,12 @@ export const Volumetd = styled(Td)`
 `
 
 export const PriceChangetd = styled(Td)`
-    width: 80px;
+    width: 100px;
+    max-width: 100px;
+    @media screen and (max-width: 768px) {
+      max-width:20vw;
+      min-width:20vw;
+    }
 `
 
 export const Div = styled.div`
@@ -74,9 +100,6 @@ export const Div = styled.div`
   @media screen and (max-width: 768px) {
     flex-direction: column;
     flex-wrap: wrap;
-  }
-  @media screen and (max-width: 350px) {
-    font-size: 10;
   }
 `
 
@@ -130,8 +153,6 @@ export const CoinSymbol = styled.p`
     @media screen and (max-width: 768px) {
       flex-wrap: wrap;
       display: grid;
-      // padding: 15px 5px;
-      // padding-top: 5px;
     }
   `
   }

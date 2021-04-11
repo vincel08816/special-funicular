@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Background, ModalWrapper, ModalContent, CloseModalButton, Header, CoinTitle, Img, Price, H2, Percentage} from './CoinModalStyles'
+import { Background, ModalWrapper, ModalContent, CloseModalButton, Header, CoinTitle, Img, Price, H2, Percentage , Description} from './CoinModalStyles'
 import axios from 'axios'
 import Spinner from '../Spinner/Spinner'
 import { useSpring, animated } from 'react-spring';
@@ -53,7 +53,7 @@ const CoinModal = ({open, setOpen, coinid }) => {
                 </Header>
                 <H2>What is {data.name}?</H2>
                 {data.description.en ? 
-                  <section>{ ReactHtmlParser(data.description.en) }</section> : 
+                  <Description>{ ReactHtmlParser(data.description.en) }</Description> : 
                   "No description..."
                 }
               </ModalContent>:

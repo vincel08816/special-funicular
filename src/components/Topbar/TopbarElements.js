@@ -38,7 +38,7 @@ export const Nav = styled.nav`
   border-bottom: 4px solid palevioletred;
   @media screen and (max-width: 768px) {
     // justify-content: space-between;
-    position: fixed;
+    // position: fixed;
     z-index: 10;
   }
   ${({ wide }) =>
@@ -74,7 +74,11 @@ export const NavLink = styled(Link)`
       justify-content: center;
       :hover {
         color: teal;
-        background-color: #1F2430; 
+        background-color: #1F2430;
+      }
+      @media screen and (max-height: 568px) {
+        padding: 2vh;
+        font-size: 15px;
       }
     }
     `
@@ -98,7 +102,7 @@ export const Logout = styled(Link)`
   @media screen and (max-width: 768px) {
     padding:0;
     padding: 0;
-    margin-top: 12px;
+    margin-top: 14px;
     display: block;
     position: absolute;
     top: 0;
@@ -138,7 +142,6 @@ export const Button = styled.button`
 `
 
 export const NavDropDown = styled.div`
-  top: 75px;
   align-items: center;
   background: #1B2733;
   flex-direction: column;
@@ -147,8 +150,11 @@ export const NavDropDown = styled.div`
   width: 100%;
   z-index: 1;
   @media screen and (min-width: 768px) {
-      display: none
-    }
+    display: none
+  }
+  @media screen and (max-height: 568px) {
+    max-height: 70vh;
+  }
 `
 
   // @media screen and (min-width: 768px) {

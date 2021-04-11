@@ -8,27 +8,23 @@ export const Container = styled.div`
   padding-top: 50px;
   padding-bottom: 150px;
   flex-direction: column;
-  // width: 80vw;
-  max-width: 100vw;
-
+  width: 90vw;
+  max-width: 610px;
+  @media screen and (max-width: 350px) {
+    font-size: 15px;
+  }
   @media screen and (max-width: 768px) {
-    padding-top: 80px;
+    width: 100vw;
   }
 `
 
+
 export const CoinSearch = styled.div`
   display: flex;
-  margin-top: 40px;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   width: 100%;
-  // @media screen and (max-width: 800px) {
-  //   width: 60%;
-  // }
-  // @media screen and (max-width: 400px) {
-  //   width: 80%;
-  // }
 `
 
 export const Searchbar = styled.form`
@@ -68,6 +64,9 @@ export const Table = styled.table`
   word-wrap:break-word;
   cellspacing: 0; 
   cellpadding: 0;
+  @media screen and (max-width: 500px) {
+    max-width: 98vw;
+  }
 `
 
 export const Th = styled.th`
@@ -91,6 +90,20 @@ export const Th = styled.th`
 `
 
 export const PageSection = styled.section`
+  margin-top: 20px;
+  display: flex;
+  background: black;
+  color: white;
+  border: 1px solid black;                             
+  justify-content: space-between;
+  align-items: center;
+  height: 75px;
+  margin-bottom: 30px;
+  width: 100%:
+`
+
+export const ButtonWrapper = styled.div`
+  margin-top: 20px;
   display: flex;
   background: black;
   color: white;
@@ -98,7 +111,14 @@ export const PageSection = styled.section`
   justify-content: space-between;
   align-items: center;
   height: 75px;
-  margin-bottom: 30px;
+  width: 100%;
+
+  @media screen and (max-height: 900px) {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    width: 100vw;
+  }
 `
 
 
@@ -108,6 +128,9 @@ export const PageDiv = styled.div`
 
 export const Logoth = styled(Th)`
   width: 60px;
+  @media screen and (max-width: 768px) {
+    width:15vw;
+  }
 `
 
 export const Nameth = styled(Th)`
@@ -116,10 +139,19 @@ export const Nameth = styled(Th)`
 
 export const Priceth = styled(Th)`
   width: 80px;
+  @media screen and (max-width: 768px) {
+    width:22vw;
+  }
 `
 
 export const MarketCapth = styled(Th)`
   width: 165px;
+  // @media screen and (max-width: 330px) {
+  //   display: none;
+  // }
+  @media screen and (max-width: 768px) {
+    width:47vw;
+  }
 `
 
 export const Volumeth = styled(Th)`
@@ -128,4 +160,7 @@ export const Volumeth = styled(Th)`
 
 export const PriceChangeth = styled(Th)`
   width: 80px;
+  @media screen and (max-width: 768px) {
+    width:18vw;
+  }
 `

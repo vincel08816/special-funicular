@@ -12,7 +12,9 @@ import {
   TableDiv,
   Table,
   Th,
-  ButtonDiv
+  ButtonDiv,
+  ButtonWrapper,
+  Tr,
 } from './CoinsStyles.js'
 
 import {
@@ -120,13 +122,13 @@ const Coins = () => {
       <Table>
         <thead>
         <tr>
-            <Logoth detail> </Logoth>
-            <Nameth>Coin</Nameth>
-            <Priceth>Price</Priceth>
-            <MarketCapth>Market Cap</MarketCapth>
-            <PriceChangeth>24h %</PriceChangeth>
-            <Volumeth detail>24-H Volume</Volumeth>
-          </tr>
+          <Logoth detail> </Logoth>
+          <Nameth>Coin</Nameth>
+          <Priceth>Price</Priceth>
+          <MarketCapth>Market Cap</MarketCapth>
+          <PriceChangeth>24h %</PriceChangeth>
+          <Volumeth detail>24-H Volume</Volumeth>
+        </tr>
         </thead>
         <tbody>
         {coins ? display.map(coin => {
@@ -142,8 +144,7 @@ const Coins = () => {
         </tbody>
       </Table>
       </TableDiv>
-      <CoinSearch>
-        <PageSection>
+        <ButtonWrapper>
           <ButtonDiv>
             <Button onClick={() => setPage(1)}><BsChevronDoubleLeft /></Button>
             <Button onClick={() => setPage(page > 1 ? page - 1 : page)}><BsChevronLeft /></Button>
@@ -153,8 +154,7 @@ const Coins = () => {
             <Button onClick={() => pageNext()}><BsChevronRight /></Button>
             <Button onClick={() => pageLast()}><BsChevronDoubleRight /></Button>
           </ButtonDiv>
-        </PageSection>
-      </CoinSearch>
+        </ButtonWrapper>
     </Container>
   )
 }
